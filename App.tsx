@@ -1,58 +1,89 @@
 import React, { useEffect, useState } from "react";
-import { View, TextInput, Button, Text } from "react-native";
+import { View, TextInput, Button, Text, Alert } from "react-native";
 import { styles } from "./styles";
-import { MMKV, useMMKVString } from "react-native-mmkv";
-const storage = new MMKV({ id: "mmkv_basics" }); // A new instance of mmkv sys
-
+import { MMKV, useMMKVBoolean, useMMKVString } from "react-native-mmkv";
+import { Provider, Switch } from "react-native-paper";
+const storage = new MMKV({ id: "mmkv_basics" }); //* A new instance of mmkv sys
 type User = {
   name: string;
   email: string;
+  autoComplete: boolean;
 };
 export default function App() {
   const [name, setName] = useMMKVString("user.name");
   const [email, setEmail] = useMMKVString("user.email");
-
+  const [autoComplete, setAutoComplete] = useMMKVBoolean("user.autoComplete");
   const [user, setUser] = useState<User>();
   const handleSave = () => {
-    storage.set(
-      "user",
-      JSON.stringify({
-        //Create our Collection
-        name,
-        email,
-      })
-    );
+    try {
+      storage.set(
+        "user",
+        JSON.stringify({
+          //*Create our Collection
+          name,
+          email,
+          autoComplete,
+        })
+      );
+      Alert.alert("Data saved successfully");
+    } catch {
+      Alert.alert("something went wrong");
+    }
   };
   function fetchUser() {
-    const data = storage.getString("user"); // get our collection
+    const data = storage.getString("user"); //* get our collection
     setUser(data ? JSON.parse(data) : undefined);
   }
   useEffect(() => {
-    const Listner = storage.addOnValueChangedListener((changedKey) => {
-      const newValue = storage.getString(changedKey);
-      console.log("New value: ", newValue);
-      fetchUser();
-    });
-    return () => {
-      Listner.remove();
-    };
+    fetchUser();
   }, []);
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Name"
-        style={styles.input}
-        onChangeText={setName}
-        value={name}
-      />
-      <TextInput
-        placeholder="E-mail"
-        style={styles.input}
-        onChangeText={setEmail}
-        value={email}
-      />
-      <Button title="Save" onPress={handleSave} />
-      <Text>{user ? `Name: ${user.name}\nEmail: ${user.email}` : "-"}</Text>
-    </View>
+    <Provider>
+      <View style={styles.container}>
+        <View
+          style={{ flexDirection: "row", gap: 15, justifyContent: "flex-end" }}
+        >
+          <Text>Auto SignIn</Text>
+          <Switch
+            value={autoComplete}
+            onValueChange={(value) => {
+              setAutoComplete(value);
+              storage.set("user.autoComplete", value);
+            }}
+          />
+        </View>
+
+        <TextInput
+          placeholder="Name"
+          style={styles.input}
+          onChangeText={setName}
+          value={autoComplete ? name : ""}
+        />
+        <TextInput
+          placeholder="E-mail"
+          style={styles.input}
+          onChangeText={setEmail}
+          value={autoComplete ? email : ""}
+        />
+        <Button title="Save" onPress={handleSave} />
+        <Text style={{ marginTop: 30, fontSize: 12 }}>RETRIEVED DATA:</Text>
+        <View
+          style={{
+            borderColor: "#eaeaea",
+            borderRadius: 10,
+            borderWidth: 2,
+            padding: 15,
+          }}
+        >
+          <Text>
+            {user
+              ? `Name: ${user.name}\nEmail: ${user.email}\nAuto complete: ${
+                  autoComplete ? "Enabled" : "Disabled"
+                } `
+              : "-"}
+          </Text>
+        </View>
+      </View>
+    </Provider>
   );
 }

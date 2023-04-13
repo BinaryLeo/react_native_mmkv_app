@@ -21,7 +21,6 @@ Note from the offical documentation:
 React-native-mmkv is a library that allows you to easily use MMKV inside your React Native applications. It provides fast and direct bindings to the native C++ library which are accessible through a simple JS API.
 ~30x faster than AsyncStorage.
 
-
 #### Dependencies and command line options
 
 ```bash
@@ -33,5 +32,5 @@ yarn add react-native-vector-icons
 
 ```bash
 expo prebuild
-expo run:android
+npx expo run:android
 ```

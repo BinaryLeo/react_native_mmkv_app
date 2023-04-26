@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Button, Text, Alert } from "react-native";
+import { View, Button, Text, Alert, KeyboardAvoidingView } from "react-native";
 import { Checkbox, Provider, Switch, TextInput } from "react-native-paper";
 import { styles } from "./styles";
 import { MMKV, useMMKVBoolean, useMMKVString } from "react-native-mmkv";
@@ -54,7 +54,7 @@ export default function App() {
           autoComplete,
         })
       );
-      Alert.alert("Data saved successfully");
+      Alert.alert("SignIn", "Data saved successfully into database");
       setName("");
       setPassword("");
       fetchUser();
@@ -71,43 +71,52 @@ export default function App() {
   return (
     <Provider>
       <View style={styles.container}>
-        <View
-          style={{ flexDirection: "row", gap: 15, justifyContent: "flex-end" }}
-        >
-          <Text>Auto SignIn</Text>
-          <Switch value={autoComplete} onValueChange={setAutoComplete} />
-          <Text>Show Password</Text>
-          <Checkbox
-            status={secureTextEntry ? "checked" : "unchecked"}
-            onPress={() => setSecureTextEntry(!secureTextEntry)}
-          />
-        </View>
+        <KeyboardAvoidingView>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 15,
+              justifyContent: "flex-end",
+              alignItems: "center",
+            }}
+          >
+            <Text>Auto-fill</Text>
+            <Switch value={autoComplete} onValueChange={setAutoComplete} />
+            <Text>{secureTextEntry ? "Show Password" : "Hide Password"}</Text>
+            <Checkbox
+              status={secureTextEntry ? "unchecked" : "checked"}
+              onPress={() => setSecureTextEntry(!secureTextEntry)}
+            />
+          </View>
 
-        <TextInput
-          placeholder="Name"
-          style={styles.input}
-          onChangeText={setName}
-          value={name}
-        />
-        <TextInput
-          placeholder="Password"
-          style={styles.input}
-          onChangeText={setPassword}
-          value={password}
-          secureTextEntry={secureTextEntry}
-        />
-        <Button title="Save" onPress={handleSave} />
-        <Text style={{ marginTop: 30, fontSize: 12 }}>RETRIEVED DATA:</Text>
-        <View
-          style={{
-            borderColor: "#eaeaea",
-            borderRadius: 10,
-            borderWidth: 2,
-            padding: 15,
-          }}
-        >
-          <Text>{userInfo}</Text>
-        </View>
+          <TextInput
+            placeholder="Name"
+            style={styles.input}
+            onChangeText={setName}
+            value={name}
+          />
+          <TextInput
+            placeholder="Password"
+            style={styles.input}
+            onChangeText={setPassword}
+            value={password}
+            secureTextEntry={secureTextEntry}
+          />
+
+          <Button title="SigIn" onPress={handleSave} />
+          <Text style={{ marginTop: 30, fontSize: 12 }}>RETRIEVED DATA:</Text>
+          <View
+            style={{
+              borderColor: "#eaeaea",
+              borderRadius: 10,
+              borderWidth: 2,
+              padding: 15,
+              marginTop: 10,
+            }}
+          >
+            <Text>{userInfo}</Text>
+          </View>
+        </KeyboardAvoidingView>
       </View>
     </Provider>
   );

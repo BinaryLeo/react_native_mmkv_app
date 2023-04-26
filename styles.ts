@@ -15,5 +15,6 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     height: 20,
     padding: 16,
+    marginBottom:15
   },
 });

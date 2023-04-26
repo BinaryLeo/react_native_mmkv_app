@@ -12,15 +12,9 @@
 
 </div>
 
-A simple implementation of [MMKV](https://github.com/mrousavy/react-native-mmkv) (Key-value storage) framework.
-In this project, we will be using MMKV to store and retrieve user information, and to pre-populate the user's credentials in the sign-in form.
+This is a project that demonstrates the use of [MMKV](https://github.com/mrousavy/react-native-mmkv) , a key-value storage framework for React Native applications. With MMKV, we can easily store and retrieve user information and pre-populate their credentials in the sign-in form. This is achieved through the "allow auto-signIn" option, which automatically provides the user's stored credentials to the input  "username" and "password" fields.
 
-When the user presses the 'username' or 'password' input fields, they will be automatically provided with their stored credentials, thanks to our 'allow auto-signIn' option.
- 
-Note from the offical documentation:
-React-native-mmkv is a library that allows you to easily use MMKV inside your React Native applications. It provides fast and direct bindings to the native C++ library which are accessible through a simple JS API.
-~30x faster than AsyncStorage.
-
+One of the major advantages of MMKV over other storage solutions like AsyncStorage is its support for synchronous operations. This allows for greater flexibility in managing data storage needs, especially in cases where data needs to be immediately persisted before proceeding to the next step in a process. MMKV's efficient C++ implementation ensures that performance is not compromised even with synchronous operations, making it a great option for React Native developers. According to the official documentation, MMKV is around 30 times faster than AsyncStorage.
 #### Dependencies and command line options
 
 ```bash

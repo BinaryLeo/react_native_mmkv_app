@@ -1,42 +1,73 @@
 import React, { useEffect, useState } from "react";
-import { View, TextInput, Button, Text, Alert } from "react-native";
+import { View, Button, Text, Alert } from "react-native";
+import { Checkbox, Provider, Switch, TextInput } from "react-native-paper";
 import { styles } from "./styles";
 import { MMKV, useMMKVBoolean, useMMKVString } from "react-native-mmkv";
-import { Provider, Switch } from "react-native-paper";
-const storage = new MMKV({ id: "mmkv_basics" }); //* A new instance of mmkv sys
+
+const storage = new MMKV({ id: "mmkv_basics" });
+
 type User = {
   name: string;
-  email: string;
+  password: string;
   autoComplete: boolean;
 };
+
 export default function App() {
   const [name, setName] = useMMKVString("user.name");
-  const [email, setEmail] = useMMKVString("user.email");
+  const [password, setPassword] = useMMKVString("user.password");
   const [autoComplete, setAutoComplete] = useMMKVBoolean("user.autoComplete");
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [user, setUser] = useState<User>();
-  const handleSave = () => {
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  function fetchUser() {
+    const data = storage.getString("user");
+    const user = data ? JSON.parse(data) : undefined;
+    setUser(user);
+    if (user) {
+      setAutoComplete(user.autoComplete);
+      setName(user.name);
+      setPassword(user.password);
+    }
+  }
+
+  useEffect(() => {
+    if (autoComplete) {
+      setName(user?.name ?? "");
+      setPassword(user?.password ?? "");
+    } else {
+      setName("");
+      setPassword("");
+    }
+  }, [autoComplete, user]);
+
+  function handleSave() {
     try {
       storage.set(
         "user",
         JSON.stringify({
-          //*Create our Collection
           name,
-          email,
+          password,
           autoComplete,
         })
       );
       Alert.alert("Data saved successfully");
+      setName("");
+      setPassword("");
+      fetchUser();
     } catch {
       Alert.alert("something went wrong");
     }
-  };
-  function fetchUser() {
-    const data = storage.getString("user"); //* get our collection
-    setUser(data ? JSON.parse(data) : undefined);
   }
-  useEffect(() => {
-    fetchUser();
-  }, []);
+
+  const autoCompleteStatus = user?.autoComplete ? "Enabled" : "Disabled";
+  const userInfo = user
+    ? `Name: ${user.name}\nPassword: ${user.password}\nAuto complete: ${autoCompleteStatus}`
+    : "-";
+
   return (
     <Provider>
       <View style={styles.container}>
@@ -44,12 +75,11 @@ export default function App() {
           style={{ flexDirection: "row", gap: 15, justifyContent: "flex-end" }}
         >
           <Text>Auto SignIn</Text>
-          <Switch
-            value={autoComplete}
-            onValueChange={(value) => {
-              setAutoComplete(value);
-              storage.set("user.autoComplete", value);
-            }}
+          <Switch value={autoComplete} onValueChange={setAutoComplete} />
+          <Text>Show Password</Text>
+          <Checkbox
+            status={secureTextEntry ? "checked" : "unchecked"}
+            onPress={() => setSecureTextEntry(!secureTextEntry)}
           />
         </View>
 
@@ -57,13 +87,14 @@ export default function App() {
           placeholder="Name"
           style={styles.input}
           onChangeText={setName}
-          value={autoComplete ? name : ""}
+          value={name}
         />
         <TextInput
-          placeholder="E-mail"
+          placeholder="Password"
           style={styles.input}
-          onChangeText={setEmail}
-          value={autoComplete ? email : ""}
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry={secureTextEntry}
         />
         <Button title="Save" onPress={handleSave} />
         <Text style={{ marginTop: 30, fontSize: 12 }}>RETRIEVED DATA:</Text>
@@ -75,13 +106,7 @@ export default function App() {
             padding: 15,
           }}
         >
-          <Text>
-            {user
-              ? `Name: ${user.name}\nEmail: ${user.email}\nAuto complete: ${
-                  autoComplete ? "Enabled" : "Disabled"
-                } `
-              : "-"}
-          </Text>
+          <Text>{userInfo}</Text>
         </View>
       </View>
     </Provider>

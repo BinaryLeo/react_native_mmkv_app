@@ -1,5 +1,13 @@
+<div align="center" style="margin: 20px; text-align: center">
+
+MMKV - AutoComplete SignIn
+
+</div>
+
 
 <div align="center" style="margin: 20px; text-align: center">
+
+
 
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](https://github.com/BinaryLeo/react_native_mmkv_app/blob/main/LICENSE)
 ![GitHub last commit](https://img.shields.io/github/last-commit/BinaryLeo/react_native_mmkv_app?style=flat-square)
@@ -9,8 +17,26 @@
 
 
 
-
 </div>
+
+<table>
+  <tr>
+    <td>Video</td>
+    <td>MMKV</td>
+  
+  </tr>
+  <tr>
+   <td><video src='https://user-images.githubusercontent.com/72607039/234549107-e7d651ce-0220-4500-bb28-beb93d7de073.mp4' width=150/></td>
+    <td><img src="https://user-images.githubusercontent.com/72607039/234550235-e5f7fed8-2737-4e45-9c3c-65bf8e30a832.png" width=300></td>
+    
+    
+
+
+
+
+  </tr>
+</table>
+
 
 This is a project that demonstrates the use of [MMKV](https://github.com/mrousavy/react-native-mmkv) , a key-value storage framework for React Native applications. With MMKV, we can easily store and retrieve user information and pre-populate their credentials in the sign-in form. This is achieved through the "allow auto-signIn" option, which automatically provides the user's stored credentials to the input  "username" and "password" fields.
 

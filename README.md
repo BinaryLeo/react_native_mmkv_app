@@ -25,14 +25,9 @@ MMKV - AutoComplete SignIn
   
   </tr>
   <tr>
-   <td><video src='https://user-images.githubusercontent.com/72607039/234549107-e7d651ce-0220-4500-bb28-beb93d7de073.mp4' width=150/></td>
-    <td><img src="https://user-images.githubusercontent.com/72607039/234550235-e5f7fed8-2737-4e45-9c3c-65bf8e30a832.png" width=300></td>
-    
-    
-
-
-
-
+   <td><video src='https://user-images.githubusercontent.com/72607039/234757200-2806eb6a-e5b5-487b-9b1d-24d39166b243.mp4' width=150/></td>
+    <td><img src="https://user-images.githubusercontent.com/72607039/234757271-20d0ecba-d61d-4ee5-8761-6a40e96d9c8b.png" width=300></td>
+   
   </tr>
 </table>
 

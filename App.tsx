@@ -18,6 +18,7 @@ export default function App() {
   const [autoComplete, setAutoComplete] = useMMKVBoolean("user.autoComplete");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [user, setUser] = useState<User>();
+  const [diagramColor, setDiagramColor] = useState("#03a2be");
 
   useEffect(() => {
     fetchUser();
@@ -76,7 +77,7 @@ export default function App() {
             style={{
               flexDirection: "row",
               gap: 15,
-              justifyContent: "flex-end",
+              justifyContent: "space-between",
               alignItems: "center",
             }}
           >
@@ -115,6 +116,177 @@ export default function App() {
             }}
           >
             <Text>{userInfo}</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              gap: 5,
+              padding: 10,
+              alignItems: "center",
+            }}
+          >
+            <View
+              style={{
+                width: 60,
+                height: 60,
+                borderColor: diagramColor,
+                borderRadius: 5,
+                borderWidth: 1,
+                borderStyle: "solid",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text>INPUT</Text>
+            </View>
+            <Text>{"------>"}</Text>
+            <View
+              style={{
+                width: 80,
+                height: 80,
+                borderColor: diagramColor,
+                borderRadius: 5,
+                borderWidth: 1,
+                borderStyle: "solid",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text style={{ fontSize: 10 }}>MMKV</Text>
+              <Text style={{ fontSize: 10 }}>DATASTORE</Text>
+            </View>
+            <Text>{"------>"}</Text>
+            <View style={{ flexDirection: "column", gap: 10 }}>
+              <View
+                style={{
+                  width: 80,
+                  height: 30,
+                  borderColor: diagramColor,
+                  borderRadius: 5,
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text style={{ fontSize: 10, textAlign: "center" }}>
+                  WRITE USERNAME
+                </Text>
+              </View>
+              <View
+                style={{
+                  width: 80,
+                  height: 30,
+                  borderColor: diagramColor,
+                  borderRadius: 5,
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text style={{ fontSize: 10, textAlign: "center" }}>
+                  WRITE PASSWORD
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View
+            style={{ width: "90%", alignItems: "flex-end", marginTop: -10 }}
+          >
+            <Text style={{ fontSize: 10, textAlign: "center" }}> |</Text>
+            <Text style={{ fontSize: 10, textAlign: "center" }}> |</Text>
+            <Text style={{ fontSize: 10, textAlign: "center" }}> |</Text>
+            <View style={{ flexDirection: "row", gap: 10 }}>
+              <View style={{ flexDirection: "column" }}>
+                <Text style={{ fontSize: 12, textAlign: "center" }}>{"|"}</Text>
+                <Text style={{ fontSize: 12, textAlign: "center" }}>{"|"}</Text>
+                <Text style={{ fontSize: 12, textAlign: "center" }}>{"|"}</Text>
+                <Text style={{ fontSize: 12, textAlign: "center" }}>{"|"}</Text>
+              </View>
+
+              <View
+                style={{
+                  width: 80,
+                  height: 30,
+                  borderColor: diagramColor,
+                  borderRadius: 5,
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text style={{ fontSize: 10, textAlign: "center" }}>
+                  READ PASSWORD
+                </Text>
+              </View>
+
+              <View
+                style={{
+                  width: 80,
+                  height: 30,
+                  borderColor: diagramColor,
+                  borderRadius: 5,
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text style={{ fontSize: 10, textAlign: "center" }}>
+                  READ PASSWORD
+                </Text>
+              </View>
+              <View style={{ flexDirection: "column" }}>
+                <Text style={{ fontSize: 12, textAlign: "center" }}>{"|"}</Text>
+                <Text style={{ fontSize: 12, textAlign: "center" }}>{"|"}</Text>
+                <Text style={{ fontSize: 12, textAlign: "center" }}>{"|"}</Text>
+                <Text style={{ fontSize: 12, textAlign: "center" }}>{"|"}</Text>
+              </View>
+              <Text style={{ fontSize: 16, textAlign: "center" }}>
+                {"<------------"}
+              </Text>
+            </View>
+            <View
+              style={{
+                width: "100%",
+                justifyContent: "space-between",
+                flexDirection: "row",
+              }}
+            >
+              <View
+                style={{
+                  width: "48%",
+                  height: 30,
+                  borderColor: diagramColor,
+                  borderRadius: 5,
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text>{user?.name ? user?.name : "DISPLAY RESULT"}</Text>
+              </View>
+
+              <View
+                style={{
+                  width: "48%",
+                  height: 30,
+                  borderColor: diagramColor,
+                  borderRadius: 5,
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text>
+                  {user?.password ? user?.password : "DISPLAY RESULT"}
+                </Text>
+              </View>
+            </View>
           </View>
         </KeyboardAvoidingView>
       </View>

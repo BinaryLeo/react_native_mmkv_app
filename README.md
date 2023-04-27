@@ -24,11 +24,16 @@ MMKV - AutoComplete SignIn
   
   </tr>
   <tr>
-   <td><video src='https://user-images.githubusercontent.com/72607039/234757200-2806eb6a-e5b5-487b-9b1d-24d39166b243.mp4' width=150/></td>
-    <td><img src="https://user-images.githubusercontent.com/72607039/234757271-20d0ecba-d61d-4ee5-8761-6a40e96d9c8b.png" width=300></td>
+   <td><video src='https://user-images.githubusercontent.com/72607039/234836245-aa10b186-de08-4165-a270-4576cd93cdc2.mp4' width=150/></td>
+    <td><img src="https://user-images.githubusercontent.com/72607039/234836140-c3805903-72cb-4797-bec0-c181ed998c21.png" width=300></td>
    
   </tr>
 </table>
+
+
+
+
+
 
 
 This is a project that demonstrates the use of [MMKV](https://github.com/mrousavy/react-native-mmkv), a key-value storage framework for React Native applications. With MMKV, in this project we easily store and retrieve user information to  pre-populate their credentials in a sign-in form. This is achieved through the "allow auto-signIn" option, which automatically provides the user's stored credentials to the input  "username" and "password" fields.

@@ -104,7 +104,7 @@ export default function App() {
             secureTextEntry={secureTextEntry}
           />
 
-          <Button title="SigIn" onPress={handleSave} />
+          <Button title="SignIn" onPress={handleSave} />
           <Text style={{ marginTop: 30, fontSize: 12 }}>RETRIEVED DATA:</Text>
           <View
             style={{
